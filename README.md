@@ -4,7 +4,7 @@
 
 ## 感谢
 
-参考着https://github.com/YianAndCode/Comment2Wechat这个改的
+参考着 https://github.com/YianAndCode/Comment2Wechat 这个改的
 
 ## 使用方法
 
