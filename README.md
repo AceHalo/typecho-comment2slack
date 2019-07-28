@@ -16,8 +16,6 @@ webhook：slack的webhook地址
 
 channel：带着#或者@的slack channel
 
-username：webhook发消息的时候显示的名字
-
 
 ## License
 

@@ -47,11 +47,9 @@ class Comment2Slack_Plugin implements Typecho_Plugin_Interface
     {
         $webhook = new Typecho_Widget_Helper_Form_Element_Text('webhook', NULL, NULL, _t('WEBHOOK'), _t('slack webhook地址'));
         $channel = new Typecho_Widget_Helper_Form_Element_Text('channel', NULL, NULL, _t('CHANNEL'), _t('slack channel'));
-        $username = new Typecho_Widget_Helper_Form_Element_Text('username', NULL, NULL, _t('USERNAME'), _t('slack username'));
 
         $form->addInput($webhook->addRule('required', _t('您必须填写一个正确的slack webhook地址')));
         $form->addInput($channel->addRule('required', _t('您必须填写一个正确的channel')));
-        $form->addInput($username->addRule('required', _t('您必须填写一个正确的username')));
 
     }
     
@@ -78,12 +76,8 @@ class Comment2Slack_Plugin implements Typecho_Plugin_Interface
 
         $webhook = $options->plugin('Comment2Slack')->webhook;
         $channel = $options->plugin('Comment2Slack')->channel;
-        $username = $options->plugin('Comment2Slack')->username;
 
-        $text = "有人在您的博客发表了评论";
-        $desp = "**".$comment['author']."** 在 [「".$post->title."」](".$post->permalink." \"".$post->title."\") 中说到: \n\n > ".$comment['text'];
-
-        $postdata = array('text' => $text.":\n".$desp,'channel' => $channel,'username' => $username);
+        $postdata = array('text' => "---\n*@".$comment['author']."* "."在文章《".$post->title."》下发表了评论:\n```".$comment['text']."```\n_ `link: ".$post->permalink."` _\n---" ,'channel' => $channel);
 
         $opts = array('http' =>
             array(
